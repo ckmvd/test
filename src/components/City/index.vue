@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import { totalmem } from "os";
 export default {
   name: "City",
   data() {
@@ -65,17 +66,22 @@ export default {
     };
   },
   mounted() {
-    this.axios.get("/api/cityList").then(res => {
-      console.log(res);
-      var msg = res.data.msg;
-      if (msg === "ok") {
-        var cities = res.data.data.cities;
-        // [{ index: "A", list: [{ nm: "阿城", id: 123 }] }];
-        var { cityList, hotList } = this.formatCityList(cities);
-        this.cityList = cityList;
-        this.hotList = hotList;
-      }
-    });
+    this.axios
+      .get("/api/cityList")
+      .then(res => {
+        console.log(res);
+        var msg = res.data.msg;
+        if (msg === "ok") {
+          var cities = res.data.data.cities;
+          // [{ index: "A", list: [{ nm: "阿城", id: 123 }] }];
+          var { cityList, hotList } = this.formatCityList(cities);
+          this.cityList = cityList;
+          this.hotList = hotList;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   },
   methods: {
     formatCityList(cities) {
@@ -95,7 +101,10 @@ export default {
           //追加到index
           for (var j = 0; j < cityList.length; j++) {
             if (cityList[j].index === firstLetter) {
-              cityList[j].list.push({ nm: cities[i].nm, id: cities[i].id });
+              cityList[j].list.push({ 
+                nm: cities[i].nm, 
+                id: cities[i].id 
+                });
             }
           }
         }
@@ -131,11 +140,12 @@ export default {
         hotList
       };
     },
+    
     handleToIndex(index) {
-      var h2 = this.$refs.city_sort.getElementsByTagName('h2');
-      console.log(h2[index])
+      var h2 = this.$refs.city_sort.getElementsByTagName("h2");
+      console.log(h2[index]);
       this.$refs.city_sort.parentNode.scrollTop = h2[index].offsetTop;
-    //   this.$refs.city_List.toScrollTop(h2[index].offsetTop);
+      //   this.$refs.city_List.toScrollTop(h2[index].offsetTop);
     }
   }
 };
