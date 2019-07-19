@@ -23,12 +23,12 @@
         </div>
         <div class="info_list">
           <h2>
-            {{item.nm}}}
+            {{item.nm}}
             <img v-if="item.version" src="@/assets/maxs.png" />
           </h2>
           <p>
             观众评分
-            <span class="grade">{{item.sc}}}</span>
+            <span class="grade">{{item.sc}}</span>
           </p>
           <p>{{item.star}}}</p>
           <p>{{item.showInfo}}}</p>

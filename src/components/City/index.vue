@@ -69,7 +69,7 @@ export default {
     this.axios
       .get("/api/cityList")
       .then(res => {
-        console.log(res);
+        // console.log(res);
         var msg = res.data.msg;
         if (msg === "ok") {
           var cities = res.data.data.cities;
@@ -143,7 +143,7 @@ export default {
     
     handleToIndex(index) {
       var h2 = this.$refs.city_sort.getElementsByTagName("h2");
-      console.log(h2[index]);
+      // console.log(h2[index]);
       this.$refs.city_sort.parentNode.scrollTop = h2[index].offsetTop;
       //   this.$refs.city_List.toScrollTop(h2[index].offsetTop);
     }
